@@ -4,12 +4,12 @@ import classes from "./event-item.module.css";
 function EventItem(props) {
   const { title, id, location, image, date } = props;
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
-    date: "numeric",
+    day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const formattedAddress = location.replace(",", "\n");
+  const formattedAddress = location.replace(", ", "\n");
   const exproleLink = `/events/${id}`;
   return (
     <ul>
@@ -22,7 +22,7 @@ function EventItem(props) {
               <time>{humanReadableDate}</time>
             </div>
             <div className={classes.address}>
-              <h2>{formattedAddress}</h2>
+              <address>{formattedAddress}</address>
             </div>
           </div>
           <div className={classes.actions}>
