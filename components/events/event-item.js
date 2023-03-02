@@ -1,6 +1,7 @@
 import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
+import ArrowRightIcon from "../icons/arrow-right-icon";
 
 import classes from "./event-item.module.css";
 
@@ -31,7 +32,12 @@ function EventItem(props) {
             </div>
           </div>
           <div className={classes.actions}>
-            <Button link={exproleLink}>Explore Events</Button>
+            <Button link={exproleLink}>
+              <span>Explore Events</span>
+              <span className={classes.icon}>
+                <ArrowRightIcon />
+              </span>
+            </Button>
           </div>
         </div>
       </li>
