@@ -12,6 +12,7 @@ function EventList(props) {
           date={event.date}
           location={event.location}
           title={event.title}
+          id={event.id}
         />
       ))}
     </div>
