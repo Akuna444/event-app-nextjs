@@ -29,7 +29,7 @@ function EventsSearch() {
           </select>
         </div>
       </div>
-      <Button>Find All Events</Button>
+      <Button>Find Events</Button>
     </form>
   );
 }
