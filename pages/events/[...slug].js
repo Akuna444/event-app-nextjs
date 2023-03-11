@@ -14,7 +14,7 @@ function FilteredEvents() {
   if (!filterData) {
     return (
       <ErrorAlert>
-        <p>Loading...</p>
+        <p className="center">Loading...</p>
       </ErrorAlert>
     );
   }
