@@ -4,13 +4,19 @@ import { getFilteredEvents } from "../../dummy-data";
 
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
+import Button from "../../components/ui/button";
+import ErrorAlert from "../../components/ui/error-alert";
 
 function FilteredEvents() {
   const router = useRouter();
 
   const filterData = router.query.slug;
   if (!filterData) {
-    return <p>Loading...</p>;
+    return (
+      <ErrorAlert>
+        <p>Loading...</p>
+      </ErrorAlert>
+    );
   }
 
   const filteredYear = filterData[0];
@@ -27,7 +33,16 @@ function FilteredEvents() {
     numMonth < 1 ||
     numMonth > 12
   ) {
-    return <p>Invalid Filter! Please use valid values</p>;
+    return (
+      <Fragment>
+        <ErrorAlert>
+          <p>Invalid Filter! Please use valid values</p>
+        </ErrorAlert>
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
+    );
   }
 
   const filteredEvents = getFilteredEvents({
@@ -36,7 +51,17 @@ function FilteredEvents() {
   });
 
   if (!filteredEvents || filteredEvents.length === 0) {
-    return <p>No Events Found For The Filter</p>;
+    return (
+      <Fragment>
+        <ErrorAlert>
+          <p>No Events Found For The Filter</p>
+        </ErrorAlert>
+
+        <div className="center">
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
+    );
   }
 
   const date = new Date(numYear, numMonth - 1);
