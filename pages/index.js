@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 
-import { getFeaturedEvents } from "../helpers/api-util";
+import { getFeaturedEvents } from "../helpers/api-utils";
 import EventList from "../components/events/event-list";
 import EventsSearch from "../components/events/events-search";
 
