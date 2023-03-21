@@ -19,8 +19,8 @@ function HomePage(props) {
       <Head>
         <title>Next Events</title>
         <meta
-          name="Description"
-          content="Find great Events a;;pw ypuu tp emvp;ve"
+          name="description"
+          content="Find a lots of great events that allow you to evolve..."
         />
       </Head>
       <EventsSearch onSearch={findEventsHandler} />

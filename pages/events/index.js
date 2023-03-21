@@ -12,7 +12,7 @@ function AllEvents(props) {
         <title>All Events</title>
         <meta
           name="description"
-          content="Find alot of great events that allow you to evolve..."
+          content="Find a lot of great events that allow you to evolve..."
         />
       </Head>
       <EventList items={events} />
