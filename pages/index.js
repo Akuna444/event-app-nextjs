@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { getFeaturedEvents } from "../helpers/api-utils";
 import EventList from "../components/events/event-list";
@@ -15,6 +16,13 @@ function HomePage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>Next Events</title>
+        <meta
+          name="Description"
+          content="Find great Events a;;pw ypuu tp emvp;ve"
+        />
+      </Head>
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={props.events} />
     </Fragment>
