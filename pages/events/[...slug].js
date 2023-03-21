@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { getFilteredEvents } from "../../helpers/api-utils";
 
+import Head from "next/head";
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
@@ -22,9 +23,20 @@ function FilteredEvents(props) {
   // const numYear = +filteredYear;
   // const numMonth = +filteredMonth;
 
+  const pageHeadData = (
+    <Head>
+      <title>Filltered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${props.date.month}/${props.date.year}`}
+      />
+    </Head>
+  );
+
   if (props.hasError) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid Filter! Please use valid values</p>
         </ErrorAlert>
@@ -40,6 +52,7 @@ function FilteredEvents(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No Events Found For The Filter</p>
         </ErrorAlert>
@@ -55,6 +68,7 @@ function FilteredEvents(props) {
 
   return (
     <Fragment>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
