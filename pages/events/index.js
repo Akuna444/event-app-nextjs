@@ -1,12 +1,22 @@
+import { Fragment } from "react";
+
 import EventList from "../../components/events/event-list";
 import { getAllEvents } from "../../helpers/api-utils";
+import Head from "next/head";
 
 function AllEvents(props) {
   const events = props.allEvents;
   return (
-    <div>
+    <Fragment>
+      <Head>
+        <title>All Events</title>
+        <meta
+          name="description"
+          content="Find alot of great events that allow you to evolve..."
+        />
+      </Head>
       <EventList items={events} />
-    </div>
+    </Fragment>
   );
 }
 
