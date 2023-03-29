@@ -1,7 +1,6 @@
-import fs from "fs";
-import path from "path";
+import { MongoClient } from "mongodb";
 
-function handler(req, res) {
+async function handler(req, res) {
   if (req.method === "POST") {
     const userEmail = req.body.email;
     if (!userEmail || !userEmail.include("@")) {
@@ -9,13 +8,15 @@ function handler(req, res) {
       return;
     }
 
-    console.log(userEmail);
+    const client = await MongoClient.connect(
+      "mongodb+srv://akuna444:SB9mPynyww2noO2q@cluster0.ex41jje.mongodb.net/newsletter?retryWrites=true&w=majority"
+    );
+
+    const db = client.db();
+
+    await db.collection("emails").insertOne({ email: userEmail });
+    client.close();
     res.status(201).json({ message: "Signed UP!" });
-    // const filePath = path.join(process.cwd(), "data", "newsletter.json");
-    // const fileData = fs.readFileSync(filePath);
-    // const data = JSON.parse(fileData);
-    // data.push(userEmail);
-    // fs.writeFileSync(data);
   }
 }
 

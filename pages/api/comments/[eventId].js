@@ -23,7 +23,7 @@ function handler(req, res) {
       text,
     };
 
-    res.status(201).json({ message: "Succesfull!", comment: newComments });
+    res.status(201).json({ message: "Succesful!", comments: newComments });
   }
 
   if (req.method === "GET") {
@@ -32,6 +32,8 @@ function handler(req, res) {
       { id: "c2", name: "Akuti", text: "Second comment" },
     ];
 
-    res.status(200).json({ message: "Successful!", comment: dummyComments });
+    res.status(200).json({ message: "Successful!", comments: dummyComments });
   }
 }
+
+export default handler;
