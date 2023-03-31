@@ -33,3 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 pages/api/comments/[eventId].js
+pages/api/comments/[eventId].js
+pages/api/newsletter.js

@@ -1,4 +1,18 @@
-function handler(req, res) {
+import {
+  connectDatabase,
+  insertDocuments,
+  getAllDocuments,
+} from "../../../helpers/db-utils";
+
+async function handler(req, res) {
+  let client;
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    res.status(500).json({ message: "Failed to connect to database..." });
+    return;
+  }
+
   const eventId = req.query.eventId;
 
   if (req.method === "POST") {
@@ -13,27 +27,41 @@ function handler(req, res) {
       text.trim() === ""
     ) {
       res.status(422).json({ message: "Invalid Input" });
+      client.close();
       return;
     }
 
     const newComments = {
-      id: new Date().toISOString(),
       email,
       name,
       text,
+      eventId,
     };
 
-    res.status(201).json({ message: "Succesful!", comments: newComments });
+    try {
+      const result = await insertDocuments(client, "comments", newComments);
+      newComments._id = result.insertedId;
+
+      console.log(result);
+
+      res.status(201).json({ message: "Succesful!", comments: newComments });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Failed to insert documents to database..." });
+    }
   }
 
   if (req.method === "GET") {
-    const dummyComments = [
-      { id: "c1", name: "Akuna", text: "First comment" },
-      { id: "c2", name: "Akuti", text: "Second comment" },
-    ];
-
-    res.status(200).json({ message: "Successful!", comments: dummyComments });
+    try {
+      const documents = await getAllDocuments(client, "comments", { _id: -1 });
+      res.status(200).json({ message: "Successful!", comments: documents });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch all documents" });
+    }
   }
+
+  client.close();
 }
 
 export default handler;
